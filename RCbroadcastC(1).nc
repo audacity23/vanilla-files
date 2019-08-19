@@ -31,7 +31,6 @@
    event void AMControl.startDone(error_t err) {
 	if (err == SUCCESS) {
      	call Timer0.startPeriodic(TIMER_PERIOD_MILLI);
-     	//call Timer0.start
 	}
 	else {
 	call AMControl.start();
