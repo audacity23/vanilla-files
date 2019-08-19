@@ -7,8 +7,7 @@
  };
  
 typedef nx_struct MobileMsg {	//Mobile message structure?
-  nx_uint16_t nodeid;
-  nx_uint16_t counter;		
+  nx_uint16_t nodeid;	
   nx_uint16_t data;
 } MobileMsg;
 
