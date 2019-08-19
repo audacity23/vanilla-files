@@ -44,18 +44,12 @@
 	}
 
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
-		if (len == sizeof(CentralCoordMsg)) {
-			CentralCoordMsg* newpkt = (CentralCoordMsg*)payload;	
-			//temp = newpkt->data;
-			//temp++;
-			//printf("Done");
+		if (len == sizeof(RCtoCCMsg)) {
+			CentralCoordMsg* newpkt = (CentralCoordMsg*)payload;
 			temp = newpkt->nodeid;
-
 			if (temp == 1 || temp==2 || temp==3 || temp==4 || temp==5 || temp==6){			//only if it belongs to a Room coordi	
-				counter = newpkt->counter;
-				data = newpkt->data;			//data kya receive hoga?		
-				call Leds.set(newpkt->counter);
-				printf("node number : %u \t",nodeid);
+			data = newpkt->data;
+			printf("data received from : %u \t", temp);
 				}
 			}
 		return msg;
