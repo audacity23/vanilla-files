@@ -4,7 +4,7 @@
 #include "CentralCoord.h"
 #include "mobiledata.h"
 #include "printf.h"
-														//different frequencies pe msg ko sunna hai...
+														
  
  module RCbroadcastC {
   uses interface Boot;
@@ -20,7 +20,9 @@
 
   bool busy = FALSE;
   message_t pkt;
-  int count=0;
+  uint16_t count=0;
+  uint16_t sender;
+  uint16_t data;
   
 	uint8_t counter;
 
@@ -41,14 +43,10 @@
 	}
 
 ->	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
-		if (len == sizeof(BroadcastMsg)) {
-			BroadcastMsg* newpkt = (BroadcastMsg*)payload;
-			temp = newpkt->nodeid;
-			if (temp == 1){
-				counter = newpkt->counter;		
-				call Leds.set(newpkt->counter);
-				printf("data number : %u \t received from node 1\n",counter);
-				}
+		if (len == sizeof(MobileMsg)) {
+			MobileMsg* newpkt = (MobileMsg*)payload;
+			sender = newpkt->nodeid;
+			data = newpkt->data;
 			}
 		return msg;
 	}
@@ -56,19 +54,12 @@
 		counter++;	
 		if (!busy) {
 			BroadcastMsg* newpkt = (BroadcastMsg*)(call Packet.getPayload(&pkt, sizeof(BroacastMsg)));
-			//newpkt->data = 1;
-			//printf(newpkt->data);
-			//printf("sending to node 2 ");
 			newpkt->nodeid = TOS_NODE_ID;
-			newpkt->counter = data;			//kya data(broadcast table) bhejna hai?
 			if (call AMSend.send(AM_BROADCAST_ADDR, &pkt, sizeof(BroadcastMsg)) == SUCCESS) {
 				busy = TRUE;
 				}
 		}
 	}
-
-	// event void sendDone(message_t* msg, error_t error) {
-	// }
 
 	event void AMSend.sendDone(message_t* msg, error_t error) {
 		if (&pkt == msg) {
