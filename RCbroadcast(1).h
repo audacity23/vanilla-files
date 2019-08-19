@@ -8,9 +8,7 @@
  
 typedef nx_struct BroadcastMsg {	//Broadcast message structure
   nx_uint16_t nodeid;
- -> nx_uint16_t broadcasttable;		// how do you broadcast a table message?
-  nx_uint16_t data;
-  nx_uint16_t counter;
+ // nx_uint16_t data;
 } BroadcastMsg;
 
 typedef nx_struct RCtoCCMsg {	//RC to CC message structure
