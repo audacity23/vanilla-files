@@ -6,11 +6,10 @@
    TIMER_PERIOD_MILLI = 10
  };
  
-typedef nx_struct CentralCoordMsg {
+typedef nx_struct RCtoCCMsg {
   nx_uint16_t nodeid;
-  nx_uint16_t counter;
   nx_uint16_t data;
-} CentralCoordMsg;
+} RCtoCCMsg;
 
 
  #endif
