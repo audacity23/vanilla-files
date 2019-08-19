@@ -12,5 +12,10 @@ typedef nx_struct MobileMsg {	//Mobile message structure?
   nx_uint16_t data;
 } MobileMsg;
 
+typedef nx_struct BroadcastMsg {	//Broadcast message structure
+  nx_uint16_t nodeid;
+ // nx_uint16_t data;
+} BroadcastMsg;
+
 
  #endif
