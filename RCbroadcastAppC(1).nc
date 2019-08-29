@@ -11,8 +11,11 @@
    components LedsC;
    components RCbroadcastC as App;
    components new TimerMilliC() as Timer0;
-   components new TimerMilliC() as Timer1;
-//
+   components new TimerMilliC() as TimerBroadcast;
+   components new TimerMilliC() as TimerDataCycle;
+   components new TimerMilliC() as TimerAck1;
+   components new TimerMilliC() as TimerAck2;
+
    components ActiveMessageC;
    components new AMSenderC(AM_BROADCASTRC); 	
    components SerialPrintfC,SerialStartC;
@@ -24,4 +27,8 @@
    App.AMPacket -> AMSenderC;
    App.AMSend -> AMSenderC;
    App.AMControl -> ActiveMessageC;
+   App.TimerAck1 -> TimerAck1;
+   App.TimerAck2 -> TimerAck2;
+   App.TimerBroadcast -> TimerBroadcast;
+   App.TimerDataCycle -> TimerDataCycle;
  }
