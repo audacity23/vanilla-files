@@ -26,7 +26,8 @@
   	uint16_t slot = TOS_NODE_ID - 6;
 	uint16_t server;
 	uint16_t counter = 0;
-	uint16_t data;			
+	uint16_t data;		
+	int out = 0;
 	
    	event void Boot.booted() {
 		call AMControl.start();
@@ -48,13 +49,15 @@
 		if (len == sizeof(BroadcastMsg)) {
 			BroadcastMsg* newpkt = (BroadcastMsg*)payload;
 			server = newpkt->node_id;
+			out = 1;
 			}
 		return msg;
 	}
     
     event void Timer0.fired(){
     	counter = 0;
-    	call Timer1.startPeriodic(10);
+	if(out == 1)
+    	{call Timer1.startPeriodic(10);}
     }
     event void Timer1.fired() {				//when is timer1 getting fired?
 		counter++;
@@ -67,6 +70,7 @@
 						busy = TRUE;
 													  }
 					   }
+					   out = 0;
 				}
 	}
 
