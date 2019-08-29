@@ -21,21 +21,16 @@ module RCbroadcastC {
 implementation {
 	
 	bool busy = FALSE;
-	message_t pkt;
-  	uint16_t nodeid[18];			
+	message_t pkt;			
   	int i=0;
 	int index = 0;
-	uint32_t myid = TOS_NODE_ID;	//new
+	uint32_t myid = TOS_NODE_ID;	
 	uint16_t temp;
-  	uint16_t temp_slotid;
   	uint16_t data[18];			
-  	uint16_t newnode;
   	uint32_t delay = 10; // time for msg transmission.
   	uint32_t ackTime = 5; //time for ack fire.
   	int counter = 0;
-	bool newAck = FALSE;
-	int breaks = 0;				//new
-	uint32_t delayforsendingtoCC = 300;		//new
+	uint32_t delayforsendingtoCC = 600;		
 
    	event void Boot.booted() {
 		call AMControl.start();
@@ -45,10 +40,8 @@ implementation {
 		if (err == SUCCESS) {
 			for(i = 0 ; i< 18 ;i++){
 				data[i] = -1; // intially no data is available
-				nodeid[i] = -1; // intially all slots are free
 			}
-     		call Timer0.startPeriodic(TIMER_PERIOD_MILLI);
-     		call TimerDataCycle.startPeriodicAt(myid*100,delayforsendingtoCC);		//new, accepts only uint32_t
+     		call Timer0.startPeriodic(TIMER_PERIOD_MILLI*3);		
 		}
 		else {
 		call AMControl.start();
@@ -71,36 +64,9 @@ implementation {
 	}
     
     event void Timer0.fired() { //generic timer.
-    		for(i=0;i<(totalslots-freeslots);i++)			//new
-		{
-		if(counters[i] == 3)
-		{
-		nodeid[i] = -1;
-		freeslots++;
-		breaks = 1;
-		}
-		counters[i]++;
-		}
-		if(breaks == 1)
-		{
-		call TimerBroadcast.startOneShot(delay);
-		}
-		breaks = 0;
-		counter++;
-		/*if(counter % 3 == 0){				 
-			counter = 0; //reset counter for new cycle.
-			for( i = 0; i< 18;i++){
-				nodeid[i] = -1; //reset all slot info	
-			}
-			freeslots++;
-			call TimerBroadcast.startOneShot(delay);
-		}*/
-			if(newAck == TRUE){				
-				call TimerBroadcast.startOneShot(delay);
-			}
-			else{
-				counter = 0; //reset counter for new cycle.
-			}
+    		index = 0;
+    		call TimerBroadcast.startOneShot(delay);
+		call TimerDataCycle.startPeriodicAt(myid*10,delayforsendingtoCC);
 	}
 
 	event void TimerBroadcast.fired() {
