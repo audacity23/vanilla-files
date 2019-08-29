@@ -61,9 +61,8 @@
 		if(counter == slot+2){			//why slot+2?
 				if (!busy) {
 					MobileMsg* newpkt = (MobileMsg*)(call Packet.getPayload(&pkt, sizeof(MobileMsg)));
-					newpkt->data = slot;  //random data.				
+					newpkt->data = data;  //random data.				
 					newpkt->nodeid = TOS_NODE_ID;
-					newpkt->slot_id = slot;
 					if (call AMSend.send(server, &pkt, sizeof(MobileMsg)) == SUCCESS) {
 						busy = TRUE;
 													  }
