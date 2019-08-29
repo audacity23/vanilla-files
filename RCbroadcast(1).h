@@ -3,23 +3,69 @@
  
  enum {
    AM_BROADCASTRC = 6,
-   TIMER_PERIOD_MILLI = 10
+   TIMER_PERIOD_MILLI = 200
  };
  
-typedef nx_struct BroadcastMsg {	//Broadcast message structure
-  nx_uint16_t nodeid;
- // nx_uint16_t data;
+typedef nx_struct BroadcastMsg {	//Broadcast message structure    (ISME NODEID OF ALL THE EXISTING NODES KAISE BHEJE?)
+  nx_uint16_t node_id;
+  nx_uint16_t Tot_nodes;		// N
+  nx_uint16_t free_nodes; // M
+  nx_uint16_t slot1;  
+  nx_uint16_t slot2;
+  nx_uint16_t slot3;
+  nx_uint16_t slot4;         
+  nx_uint16_t slot5;
+  nx_uint16_t slot6;
+  nx_uint16_t slot7;
+  nx_uint16_t slot8;
+  nx_uint16_t slot9;
+  nx_uint16_t slot10;
+  nx_uint16_t slot11;
+  nx_uint16_t slot12;
+  nx_uint16_t slot13;
+  nx_uint16_t slot14;
+  nx_uint16_t slot15;
+  nx_uint16_t slot16;
+  nx_uint16_t slot17;
+  nx_uint16_t slot18;
 } BroadcastMsg;
 
-typedef nx_struct MobileMsg {	//Mobile message structure?
-  nx_uint16_t nodeid;	
-  nx_uint16_t data;
-} MobileMsg;
-
 typedef nx_struct RCtoCCMsg {	//RC to CC message structure
-  nx_uint16_t nodeid;
-  nx_uint16_t data;
+  nx_uint16_t node_id;
+  nx_uint16_t data1;
+  nx_uint16_t data2;
+  nx_uint16_t data3;
+  nx_uint16_t data4;
+  nx_uint16_t data5;
+  nx_uint16_t data6;
+  nx_uint16_t data7;
+  nx_uint16_t data8;
+  nx_uint16_t data9;
+  nx_uint16_t data10;
+  nx_uint16_t data11;
+  nx_uint16_t data12;
+  nx_uint16_t data13;
+  nx_uint16_t data14;
+  nx_uint16_t data15;
+  nx_uint16_t data16;
+  nx_uint16_t data17;
+  nx_uint16_t data18;
 } RCtoCCMsg;
 
+
+typedef nx_struct MobileMsg {	 //Mobile message to RC structure.
+  nx_uint16_t node_id;		
+  nx_uint16_t data;
+  nx_uint16_t slot_id;
+} MobileMsg;
+
+typedef nx_struct REQMsg {
+ nx_uint16_t node_id;
+ nx_uint16_t slot_id;
+} REQMsg;
+
+typedef nx_struct AckMsg {
+  nx_uint16_t ackId;
+} AckMsg;
 
  #endif
