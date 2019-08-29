@@ -38,5 +38,9 @@ typedef nx_struct MobileMsg {	 //Mobile message to RC structure.
   nx_uint16_t data;
 } MobileMsg;
 
+typedef nx_struct AckMsg {
+  nx_uint16_t ackId;
+} AckMsg;
+
 
  #endif
