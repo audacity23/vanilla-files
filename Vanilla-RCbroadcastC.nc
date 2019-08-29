@@ -15,6 +15,7 @@ module RCbroadcastC {
 	uses interface Packet;
 	uses interface AMPacket;
 	uses interface AMSend;
+        uses interface Receive;
 	uses interface SplitControl as AMControl;
 }
  
