@@ -10,7 +10,6 @@ module RCbroadcastC {
 	uses interface Leds;
 	uses interface Timer<TMilli> as Timer0;
 	uses interface Timer<TMilli> as TimerAck1;
-  	uses interface Timer<TMilli> as TimerAck2;
   	uses interface Timer<TMilli> as TimerBroadcast;
   	uses interface Timer<TMilli> as TimerDataCycle;
 	uses interface Packet;
@@ -71,17 +70,6 @@ implementation {
 				counters[slotid] = 0;				//new
 				call TimerAck1.startOneShot(ackTime); 
 			}
-			
-		}
-		if(len == sizeof(REQMsg))
-		{
-			temp = newpkt->node_id;
-			temp_slotid = newpkt->slot_id;
-			if(nodeid[temp_slotid] == -1){ //check if the slot requested is empty.
-				nodeid[temp_slotid] = temp;
-				freeSlots--;
-				call TimerAck2.startOneShot(ackTime);
-			}				
 		}
 		return msg;
 	}
@@ -184,17 +172,6 @@ implementation {
 		if (!busy) {
 			AckMsg* newpkt = (AckMsg*)(call Packet.getPayload(&pkt, sizeof(AckMsg)));
 			newpkt->ackId = 1; // ackId = 1 is success , 2 is failure.
-			if (call AMSend.send(temp, &pkt, sizeof(AckMsg)) == SUCCESS) { //send ack to the node which sent the data
-				busy = TRUE;
-			}
-		}
-	}
-
-	event void TimerAck2.fired() {
-		if (!busy) {
-			AckMsg* newpkt = (AckMsg*)(call Packet.getPayload(&pkt, sizeof(AckMsg)));
-			newpkt->ackId = 1; // ackId = 1 is success , 2 is failure.
-			newAck = TRUE;						//new
 			if (call AMSend.send(temp, &pkt, sizeof(AckMsg)) == SUCCESS) { //send ack to the node which sent the data
 				busy = TRUE;
 			}
