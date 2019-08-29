@@ -54,7 +54,7 @@
     
     event void Timer0.fired(){
     	counter = 0;
-    	call Timer0.startPeriodic(10);
+    	call Timer1.startPeriodic(10);
     }
     event void Timer1.fired() {				//when is timer1 getting fired?
 		counter++;
