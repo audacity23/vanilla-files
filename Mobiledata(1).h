@@ -6,7 +6,7 @@ enum {
    TIMER_PERIOD_MILLI = 200
 };
  
-typedef nx_struct BroadcastMsg {	//Broadcast message structure    (ISME NODEID OF ALL THE EXISTING NODES KAISE BHEJE?)
+/*typedef nx_struct BroadcastMsg {	//Broadcast message structure    (ISME NODEID OF ALL THE EXISTING NODES KAISE BHEJE?)
   nx_uint16_t node_id;
   nx_uint16_t Tot_nodes;		// N
   nx_uint16_t free_nodes; // M
@@ -28,21 +28,21 @@ typedef nx_struct BroadcastMsg {	//Broadcast message structure    (ISME NODEID O
   nx_uint16_t slot16;
   nx_uint16_t slot17;
   nx_uint16_t slot18;
-} BroadcastMsg;
+} BroadcastMsg;*/
 
 typedef nx_struct MobileMsg {	 //Mobile message to RC structure.
   nx_uint16_t node_id;		
   nx_uint16_t data;
-  nx_uint16_t slot_id;
+  //nx_uint16_t slot_id;
 } MobileMsg;
 
-typedef nx_struct REQMsg {
+/*typedef nx_struct REQMsg {
  nx_uint16_t node_id;
  nx_uint16_t slot_id;
 } REQMsg;
 
 typedef nx_struct AckMsg {
   nx_uint16_t ackId;
-} AckMsg;
+} AckMsg;*/
 
  #endif
