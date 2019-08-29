@@ -24,10 +24,8 @@ implementation {
 	message_t pkt;
   	uint16_t nodeid[18];			
   	int i=0;
-  	int freeSlots =18;
 	uint32_t myid = TOS_NODE_ID;	//new
-	int totalslots = 18;		//new
-  	uint16_t temp;
+	uint16_t temp;
   	uint16_t temp_slotid;
   	uint16_t data[18];			
   	uint16_t newnode;
@@ -107,30 +105,10 @@ implementation {
 			}
 	}
 
-	event void TimerBroadcast.fired() { //generic timer.
+	event void TimerBroadcast.fired() {
 		if (!busy) {
 			BroadcastMsg* newpkt = (BroadcastMsg*)(call Packet.getPayload(&pkt, sizeof(BroacastMsg)));
-			newpkt->Tot_Nodes = 18;
-			newpkt->free_nodes = freeSlots;
 			newpkt->node_id = TOS_NODE_ID;
-			newpkt->slot1 = nodeid[0]; //find better handling technique.
-			newpkt->slot2 = nodeid[1];
-			newpkt->slot3 = nodeid[2];
-			newpkt->slot4 = nodeid[3];
-			newpkt->slot5 = nodeid[4];
-			newpkt->slot6 = nodeid[5];
-			newpkt->slot7 = nodeid[6];
-			newpkt->slot8 = nodeid[7];
-			newpkt->slot9 = nodeid[8];
-			newpkt->slot10 = nodeid[9];
-			newpkt->slot11 = nodeid[10];
-			newpkt->slot12 = nodeid[11];
-			newpkt->slot13 = nodeid[12];
-			newpkt->slot14 = nodeid[13];
-			newpkt->slot15 = nodeid[14];
-			newpkt->slot16 = nodeid[15];
-			newpkt->slot17 = nodeid[16];
-			newpkt->slot18 = nodeid[17];
 			if (call AMSend.send(AM_BROADCAST_ADDR, &pkt, sizeof(BroadcastMsg)) == SUCCESS) {
 				busy = TRUE;
 			}
@@ -140,7 +118,7 @@ implementation {
 	event void TimerDataCycle.fired() { //generic timer.
 		if (!busy) {
 			RCtoCCMsg* newpkt = (RCtoCCMsg*)(call Packet.getPayload(&pkt, sizeof(BroacastMsg)));
-			newpkt->node_id = TOS_NODE_ID; //find better handling technique.
+			newpkt->node_id = TOS_NODE_ID; 
 			newpkt->data1 = data[0];
 			newpkt->data2 = data[1];
 			newpkt->data3 = data[2];
