@@ -45,7 +45,7 @@
 		if (len == sizeof(RCtoCCMsg)) {
 			RCtoCCMsg* newpkt = (RCtoCCMsg*)payload;	
 			temp = newpkt->nodeid;
-			printf("data received from nodeid: %u\n", temp);
+			printf("data received from nodeid: %u \n", temp);
 			if(temp == 1 || temp==2 || temp==3 || temp==4 || temp==5 || temp==6)
 			{
 			data[0] = newpkt->data1;
