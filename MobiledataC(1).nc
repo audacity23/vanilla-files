@@ -34,7 +34,7 @@
 
    	event void AMControl.startDone(error_t err) {
 		if (err == SUCCESS) {
-     		call Timer0.startPeriodic(600);			doubtful about 600
+     		call Timer0.startPeriodic(600);			//doubtful about 600
 		}
 		else {
 			call AMControl.start();
