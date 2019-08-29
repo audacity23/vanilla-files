@@ -50,6 +50,7 @@
 			BroadcastMsg* newpkt = (BroadcastMsg*)payload;
 			server = newpkt->node_id;
 			out = 1;
+			printf("broadcast received from : %u \n",server);
 			}
 		return msg;
 	}
