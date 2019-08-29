@@ -60,7 +60,6 @@ implementation {
 			printf("mobile data received from: %u \n",temp);
 			call TimerAck1.startOneShot(ackTime); 
 			}
-		}
 		return msg;
 	}
     
