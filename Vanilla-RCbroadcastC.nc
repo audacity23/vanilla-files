@@ -71,7 +71,7 @@ implementation {
 
 	event void TimerBroadcast.fired() {
 		if (!busy) {
-			BroadcastMsg* newpkt = (BroadcastMsg*)(call Packet.getPayload(&pkt, sizeof(BroacastMsg)));
+			BroadcastMsg* newpkt = (BroadcastMsg*)(call Packet.getPayload(&pkt, sizeof(BroadcastMsg)));
 			newpkt->node_id = TOS_NODE_ID;
 			if (call AMSend.send(AM_BROADCAST_ADDR, &pkt, sizeof(BroadcastMsg)) == SUCCESS) {
 				busy = TRUE;
@@ -81,7 +81,7 @@ implementation {
 
 	event void TimerDataCycle.fired() { //generic timer.
 		if (!busy) {
-			RCtoCCMsg* newpkt = (RCtoCCMsg*)(call Packet.getPayload(&pkt, sizeof(BroacastMsg)));
+			RCtoCCMsg* newpkt = (RCtoCCMsg*)(call Packet.getPayload(&pkt, sizeof(BroadcastMsg)));
 			newpkt->node_id = TOS_NODE_ID; 
 			newpkt->data1 = data[0];
 			newpkt->data2 = data[1];
