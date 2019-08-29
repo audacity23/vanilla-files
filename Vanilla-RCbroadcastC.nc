@@ -57,6 +57,7 @@ implementation {
 			temp = newpkt->node_id;
 			data[index] = newpkt->data; 
 			index++;
+			printf("mobile data received from: %u \n",temp);
 			call TimerAck1.startOneShot(ackTime); 
 			}
 		}
