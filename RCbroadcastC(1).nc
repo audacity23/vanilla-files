@@ -24,6 +24,7 @@ implementation {
 	message_t pkt;
   	uint16_t nodeid[18];			
   	int i=0;
+	int index = 0;
 	uint32_t myid = TOS_NODE_ID;	//new
 	uint16_t temp;
   	uint16_t temp_slotid;
@@ -32,8 +33,7 @@ implementation {
   	uint32_t delay = 10; // time for msg transmission.
   	uint32_t ackTime = 5; //time for ack fire.
   	int counter = 0;
-	int counters[18] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};		//new
-  	bool newAck = FALSE;
+	bool newAck = FALSE;
 	int breaks = 0;				//new
 	uint32_t delayforsendingtoCC = 300;		//new
 
@@ -62,11 +62,9 @@ implementation {
 		if (len == sizeof(MobileMsg)) {			
 			MobileMsg* newpkt = (MobileMsg*)payload;
 			temp = newpkt->node_id;
-			temp_slotid = newpkt->slot_id;
-			if(nodeid[temp_slotid] == temp){ //check if correct node has sent the data at the time slot.
-				data[temp_slotid] = newpkt->data;
-				counters[slotid] = 0;				//new
-				call TimerAck1.startOneShot(ackTime); 
+			data[index] = newpkt->data; 
+			index++;
+			call TimerAck1.startOneShot(ackTime); 
 			}
 		}
 		return msg;
