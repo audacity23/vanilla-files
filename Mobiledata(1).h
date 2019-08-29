@@ -28,7 +28,7 @@ typedef nx_struct BroadcastMsg {	//Broadcast message structure    (ISME NODEID O
   nx_uint16_t slot16;
   nx_uint16_t slot17;
   nx_uint16_t slot18;*/
-} BroadcastMsg;*/
+} BroadcastMsg;
 
 typedef nx_struct MobileMsg {	 //Mobile message to RC structure.
   nx_uint16_t node_id;		
